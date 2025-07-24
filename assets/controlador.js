@@ -1,3 +1,5 @@
+import { consumirAPI } from "./consumoServicios.js";
+
 // Referencias al formulario
 
 let nombres = document.getElementById("nombres");
@@ -18,12 +20,14 @@ botonFormulario.addEventListener("click", function (evento) {
     text: "You clicked the button!",
     icon: "success",
   });
+
   Swal.fire({
     icon: "error",
     title: "Oops...",
     text: "Something went wrong!",
     footer: '<a href="#">Why do I have this issue?</a>',
-  });*/
+  });
+  */
   let datosQueVoyAEnviarAlBack = {
     "nombre": nombres.value,
     "cantidadVida": cantidadVida.value,
@@ -35,5 +39,16 @@ botonFormulario.addEventListener("click", function (evento) {
   let datosListosParaViajar=JSON.stringify(datosQueVoyAEnviarAlBack)
 
   //alert(datosListosParaViajar) para verificar si si esta sirviendo 
+
+  // llamo al consumo 
+  consumirAPI(datosListosParaViajar)
+  .then(function(respuesta){
+    Swal.fire({
+    title: "Buen Trabajo!",
+    text: "Se registro el personaje con exito!",
+    icon: "success",
+  });
+    
+  })
   
 })
